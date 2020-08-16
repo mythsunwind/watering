@@ -69,6 +69,7 @@ def api_pump_test(number):
     pump1_pin1=26
     pump1_pin2=19
 
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(pump1_pin1, GPIO.OUT)
     GPIO.setup(pump1_pin2, GPIO.OUT)
@@ -88,4 +89,4 @@ def api_pump_test(number):
             entry = (datetime.datetime.now().timestamp(), "Stopping pump {}".format(row["id"]))
             conn.cursor().execute("INSERT INTO history VALUES (?,?)", entry)
             conn.commit()
- 
+    return 'Tested pump {}'.format(escape(number))
