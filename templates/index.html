@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+	   <meta charset="utf-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	   <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap.min.css') }}">
+	   <!-- <link rel="stylesheet" href="{{ url_for('static', filename = 'custom.css') }}"> -->
+      	   <script type = "text/javascript" src = "{{ url_for('static', filename = 'custom.js') }}" ></script>
+	   <title>Watering</title>
+   </head>
+   <body>
+	<nav class="navbar navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">
+		<img src="{{ url_for('static', filename = 'water-outline.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="Water drop">
+		Watering
+		</a>
+	</nav>
+
+     	<div class="container">
+
+
+    		{% for pump in pumps %}
+
+		<h1 class="mt-4">Pump {{ pump.name }}</h1>
+
+
+		<div class="d-flex flex-row">
+		  <div class="p-2"><img width="30px" height="30px" src="{{ url_for('static', filename = 'hourglass-outline.svg') }}" /></div>
+		  <div class="p-2">Watering for</div>
+		  <div class="p-2">
+			<div class="input-group">
+				<input type="text" id="pump{{ pump.id }}_seconds" class="form-control" value="{{ pump.seconds }}" aria-label="seconds" autocomplete="off" onchange="update_pump({{ pump.id }})">
+                  		<div class="input-group-append">
+                		    <span class="input-group-text">seconds</span>
+	        	            <button class="btn btn-outline-secondary" type="button" onclick="javascript:decrease_seconds({{pump.id}})">- 0.5</button>
+				    <button class="btn btn-outline-secondary" type="button" onclick="javascript:increase_seconds({{pump.id}})">+ 0.5</button>
+                  		</div>
+                  	</div>
+		  </div>
+		  <div class="p-2">
+			  <button type="button" class="btn btn-warning" onclick="test_pump({{pump.id}})">Test</button>
+		  </div>
+		</div>
+
+		<div class="d-flex flex-row">
+		  <div class="p-2"><img width="30px" height="30px" src="{{ url_for('static', filename = 'alarm-outline.svg') }}" /></div>
+		  <div class="p-2">Time</div>
+		  <div class="p-2">
+			<div class="input-group">
+				<input type="text" id="pump{{pump.id}}_hour" class="form-control" value="{{ pump.hour }}" aria-label="time"
+				autocomplete="off" onchange="update_pump({{ pump.id }})">
+                  		<div class="input-group-append">
+                		    <span class="input-group-text">o'clock</span>
+	        	            <button class="btn btn-outline-secondary" type="button" onclick="javascript:decrease_hour({{pump.id}})">-</button>
+		                    <button class="btn btn-outline-secondary" type="button" onclick="javascript:increase_hour({{pump.id}})">+</button>
+                  		</div>
+                  	</div>
+
+		  </div>
+		</div>
+
+		<div class="d-flex flex-row">
+		  <div class="p-2"><img width="30px" height="30px" src="{{ url_for('static', filename = 'calendar-outline.svg') }}" /></div>
+		  <div class="p-2">Days</div>
+		  <div class="p-2">
+			  <button type="button" id="pump{{pump.id}}_day1" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},1)">M</button>
+			  <button type="button" id="pump{{pump.id}}_day2" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},2)">T</button>
+			  <button type="button" id="pump{{pump.id}}_day3" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},3)">W</button>
+			  <button type="button" id="pump{{pump.id}}_day4" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},4)">T</button>
+			  <button type="button" id="pump{{pump.id}}_day5" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},5)">F</button>
+			  <button type="button" id="pump{{pump.id}}_day6" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},6)">S</button>
+			  <button type="button" id="pump{{pump.id}}_day7" class="btn btn-primary" data-toggle="button" autocomplete="off"
+				  onclick="javascript:toggle_day({{pump.id}},7)">S</button>
+		  </div>
+		</div>
+    
+		{% endfor %}
+
+		<h1 class="mt-4">History</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Event</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in history %}
+    <tr>
+      <th scope="row">{{ entry.date }}</th>
+      <td>{{ entry.text }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+	</div>
+   </body>
+</html>
