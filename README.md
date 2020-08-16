@@ -3,7 +3,14 @@
 Raspberry pi powered plant watering system
 
 * Web UI for setup of pumps
-* SQLite3 database for logging events
+* Event log for pump changes and activation
+
+## Software
+
+* Python 3
+* Flask
+* gpiozero
+* SQLite3 database
 
 ## Hardware
 

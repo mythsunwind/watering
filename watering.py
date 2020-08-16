@@ -2,6 +2,9 @@ from flask import Flask
 from flask import request, escape, jsonify, render_template, redirect, url_for
 import sqlite3
 import datetime
+from time import sleep
+import RPi.GPIO as GPIO
+from gpiozero import Motor
 
 dbfilename = 'watering.db'
 
@@ -63,6 +66,13 @@ def api_pump(number):
 
 @app.route('/pump/<number>/test', methods=['POST'])
 def api_pump_test(number):
+    pump1_pin1=26
+    pump1_pin2=19
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pump1_pin1, GPIO.OUT)
+    GPIO.setup(pump1_pin2, GPIO.OUT)
+
     test = request.get_json()
     miliseconds = test["milliseconds"]
     conn = sqlite3.connect(dbfilename)
