@@ -74,7 +74,7 @@ def api_pump_test(number):
     GPIO.setup(pump1_pin2, GPIO.OUT)
 
     test = request.get_json()
-    miliseconds = test["milliseconds"]
+    milliseconds = test["milliseconds"]
     conn = sqlite3.connect(dbfilename)
     conn.row_factory = sqlite3.Row
     for row in conn.cursor().execute('SELECT * FROM pumps WHERE id = ?', number):
