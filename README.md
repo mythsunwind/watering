@@ -1,11 +1,11 @@
-= Watering
+# Watering
 
 Raspberry pi powered plant watering system
 
 * Web UI for setup of pumps
 * SQLite3 database for logging events
 
-= Hardware
+## Hardware
 
 * Raspberry Pi3 Model B
 * L298N dual motor controller
@@ -14,8 +14,8 @@ Raspberry pi powered plant watering system
 * Gardena Straight Reducing Joint 6-4mm
 * 6/4mm plastic tube
 
-= Licenses
+## Licenses
 
-Code under GPL3
+Code released under GPL3
 
 Icons from https://ionicons.com/ under MIT License
