@@ -5,6 +5,8 @@ Raspberry pi powered plant watering system
 * Web UI for setup of pumps
 * Event log for pump changes and activation
 
+![Screenshot](screenshot.png)
+
 ## Software
 
 * Python 3
